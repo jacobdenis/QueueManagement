@@ -270,6 +270,7 @@
 		});
 	}
 	if(url=="patient"){
+		$("#viewprofile").hide();
 		var patientlist=$("#patient_list").DataTable({
 			dom: 'Blfrtip',
         	buttons: [
@@ -299,12 +300,28 @@
 				{ "title":"FirstName",	"data": "FirstName"	},
 				{ "title":"MiddleName",	"data": "MiddleName"	},
 				{ "title":"LastName",	"data": "LastName"	},
+				{ "title":"Phone",	"data": "Phone"	},
+				{ "title":"Address",	"data": "Address"	},
+				{ "title":"BirthDate",	"data": "BirthDate"	},
+				{ "title":"Age",	"data": null,
+					render:function(data){
+						return moment().diff(data.BirthDate,'years',false);
+					}
+				},
+				{ "title":"Gender",	"data": null,
+					render:function(data){
+						return ((data.Gender==1) ? "Female":"Male");
+					}
+				},
 				{ "title":"DateCreated",	"data": "DateCreated"	},
 				{ "title":"Action","data":null,
 				render:function(data){
 					return `
-						<button type="button" data-id=${data.PatientID} class="delete_patient btn  btn-danger btn-sm btn-flat m-b-10 m-l-5"><span class="ti-trash"></span></button>
-						<button type="button" data-id=${data.PatientID} class="show_update_patient_modal btn  btn-warning btn-sm btn-flat m-b-10 m-l-5"><span class="ti-pencil"></span></button>
+						<div class="btn-group">
+							<button type="button" data-id="${data.PatientID	}"   class="btn  btn-info btn-sm btn-flat m-b-10 m-l-5	 show_patient_profile"><span class="ti-eye"></span></button>
+							<button type="button" data-id=${data.PatientID} class="delete_patient btn  btn-danger btn-sm btn-flat m-b-10 m-l-5"><span class="ti-trash"></span></button>
+							<button type="button" data-id=${data.PatientID} class="show_update_patient_modal btn  btn-warning btn-sm btn-flat m-b-10 m-l-5"><span class="ti-pencil"></span></button>
+						</div>
 					`;
 					}
 				}
@@ -330,9 +347,37 @@
 					$("#patient_firstname").val(value.FirstName);
 					$("#patient_middlename").val(value.MiddleName);
 					$("#patient_lastname").val(value.LastName);
+					$("#patient_phone").val(value.Phone);
+					$("#patient_address").val(value.Address);
+					$("#patient_birthdate").val(value.BirthDate);
+					$("#patient_gender").val(value.Gender);
 				});
 			})
 			$("#update_patient_modal").modal('show');
+		});
+		$(document).on('click',".show_patient_profile",function(){
+			var PatientID=$(this).data('id');
+			
+			$.ajax({
+				url:  base_url+'index.php/patient/get_patientlist_by_id',
+				dataType: 'json',
+				type: 'POST',
+				data: ({data:PatientID})
+			})      
+			.done(function (data) {
+				$.each( data, function( key, value ) {
+					$(".user-profile-name").text(value.LastName+', '+ value.FirstName+' '+value.MiddleName.charAt(0));
+					$(".user-job-title").text(value.RoleType);
+					$(".phone-number").text(value.Phone);
+					$(".mail-address").text('Not Applicable');
+					$(".contact-email").text(value.Email);
+					$(".birth-date").text(value.BirthDate);
+					$(".age").text(moment().diff(value.BirthDate,'years',false));
+					$(".gender").text((value.Gender==1)? "Female":"Male");
+					$("#viewprofile").slideDown("slow");
+				});
+			})
+			
 		});
 		$(document).on('click',"#save_patient",function(){
 			updatedata("#add_patient_form",patientlist,'patient/add_patient');
@@ -348,6 +393,8 @@
 		});
 	}
 	if(url=="employee"){
+		$("#viewprofile").hide();
+		
 		var employee_list=$("#employee_list").DataTable({
 			dom: 'Blfrtip',
         	buttons: [
@@ -380,19 +427,55 @@
 				{ "title":"Username",	"data": "Username"	},
 				{ "title":"MiddleName",	"data": "MiddleName"	},
 				{ "title":"RoleType",	"data": "RoleType"	},
+				{ "title":"Phone",		"data": "Phone"	},
+				{ "title":"Address",	"data": "Address"	},
+				{ "title":"Email",	"data": "Email"	},
+				{ "title":"BirthDate",	"data": "BirthDate"	},
+				{ "title":"Gender",	"data": null,
+					render:function(data){
+						return ((data.Gender==1)? "Female":"Male");
+					}
+				},
 				{ "title":"DateCreated",	"data": "DateCreated"	},
 				{ "title":"Action","data":null,
 				render:function(data){
 					return `
-					<button type="button"  data-id="${data.EmployeeID}"  class="btn btn-danger btn-sm btn-flat m-b-10 m-l-5 delete_employee"><span class="ti-trash"></span></button>
-					<button type="button" data-id="${data.EmployeeID}"   class="btn  btn-warning btn-sm btn-flat m-b-10 m-l-5 show_update_employee_modal"><span class="ti-pencil"></span></button>
-					`;
+					<div class="btn-group" role="group" >
+						<button type="button" data-id="${data.EmployeeID}"   class="btn  btn-info btn-sm btn-flat m-b-2 m-l-2	 show_employee_profile"><span class="ti-eye"></span></button>
+						<button type="button" data-id="${data.EmployeeID}"   class="btn  btn-warning btn-sm btn-flat m-b-2 m-l-2 show_update_employee_modal"><span class="ti-pencil"></span></button>
+						<button type="button"  data-id="${data.EmployeeID}"  class="btn btn-danger btn-sm btn-flat m-b-2 m-l-2 delete_employee"><span class="ti-trash"></span></button>
+					</div>
+						`;
 					}
 				}
 	
 			],
 			responsive:true
 		});
+		$(document).on('click',".show_employee_profile",function(){
+
+			var EmployeeID=$(this).data('id');
+			$.ajax({
+				url:  base_url+'index.php/employee/get_employee_by_id',
+				dataType: 'json',
+				type: 'POST',
+				data: ({data:EmployeeID})
+			})      
+			.done(function (data) {
+				$.each(data,function(i,value){
+					$(".user-profile-name").text(value.LastName+', '+ value.FirstName+' '+value.MiddleName.charAt(0));
+					$(".user-job-title").text(value.RoleType);
+					$(".phone-number").text(value.Phone);
+					$(".mail-address").text(value.Address);
+					$(".contact-email").text(value.Email);
+					$(".birth-date").text(value.BirthDate);
+					$(".age").text(moment().diff(value.BirthDate,'years',false));
+					$(".gender").text((value.Gender==1)? "Female":"Male");
+				})
+				$("#viewprofile").slideDown("slow");
+			})
+			
+		})
 		$(document).on('click',"#show_add_employee_modal",function(){
 			$.ajax({
 				url:  base_url+'index.php/employee/get_select',
@@ -435,6 +518,11 @@
 			})      
 			.done(function (data) {
 				$.each( data, function( key, value ) {	
+					$("#employee_phone").val(value.Phone);
+					$("#employee_address").val(value.Address);
+					$("#employee_email").val(value.Email);
+					$("#employee_birthdate").val(value.BirthDate);
+					$("#employee_gender").val(value.Gender);
 					$("#employee_firstname").val(value.FirstName);
 					$("#employee_middlename").val(value.MiddleName);
 					$("#employee_lastname").val(value.LastName);

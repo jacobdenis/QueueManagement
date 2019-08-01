@@ -42,6 +42,8 @@
 		<link href="<?php echo base_url()?>assets/css/style.css" rel="stylesheet">
 		<!-- Select2 -->
 		<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/css/select2.min.css" rel="stylesheet" />
+		 <!-- jquery vendor -->
+		 <script src="<?php echo base_url()?>assets/js/lib/jquery.min.js"></script>
 		
 
 	
@@ -109,6 +111,7 @@
 									</button>
 									<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 										<a class="dropdown-item" href="<?php echo base_url('index.php/login/logout');?>">Logout</a>
+										<a class="dropdown-item" href="<?php echo base_url('index.php/employee/profile');?>">Profile</a>
 									</div>
 									</div>
                            
@@ -141,8 +144,7 @@
         </div>
        
 
-        <!-- jquery vendor -->
-        <script src="<?php echo base_url()?>assets/js/lib/jquery.min.js"></script>
+       
         <script src="<?php echo base_url()?>assets/js/lib/jquery.nanoscroller.min.js"></script>
         <!-- nano scroller -->
         <script src="<?php echo base_url()?>assets/js/lib/menubar/sidebar.js"></script>
@@ -175,7 +177,9 @@
         <!-- Moment Js -->
 		<script src="<?php echo base_url()?>assets/js/lib/moment/moment.js"> </script>	
 
-
+		<script >
+                var years = moment().diff('<?php echo $this->EmployeeInformation['BirthDate'];?>', 'years',false);
+        </script>
 
 		<script src="<?php echo base_url('assets/js/lib/datatables/js/datatables-init.js?nocache='.date('YYYY-MM-DD H:i:s').'')?>"></script> 
 		<!-- Select2 -->

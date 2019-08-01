@@ -8,7 +8,7 @@
 		
 		<table id="patient_list" class="table table-striped table-bordered">
 		</table>
-
+		<?php $this->load->view('pages/content/profile1');?>
 		</div>
 		<!-- /# card -->
 	</div>

@@ -23,6 +23,12 @@ class employee extends My_Controller {
 		$this->load->model('Auth_model','Auth');
 		$this->load->model('Access_Control_model','AC');
 	}//end of __construct
+	public function profile(){
+		$this->AC->check_module($this->uri->segment(1));
+		$this->data['pageTitle']='Profile';
+		$this->data['view']='pages/profile';
+		$this->load->view('layout',$this->data);
+	}
 	public function index(){
 		$this->AC->check_module($this->uri->segment(1));
 		$this->data['pageTitle']='Employee';
@@ -50,8 +56,9 @@ class employee extends My_Controller {
 	public function add_employee(){
 		$data=$this->decode_json($this->input->post('data'));
 		$this->db->trans_start();
-
-		$this->db->query("INSERT INTO `employee` (`EmployeeID`, `FirstName`, `MiddleName`, `LastName`, `DateCreated`) VALUES (NULL, ?, ?, ?, CURRENT_TIMESTAMP);",array($data['FirstName'],$data['MiddleName'],$data['LastName']));
+		$this->db->query("
+		INSERT INTO `employee` (`EmployeeID`, `FirstName`, `MiddleName`, `LastName`,`Phone`,`Address`,`Email`,`BirthDate`,`Gender`, `DateCreated`) VALUES (NULL, ?, ?, ?,?,?,?,?,?, CURRENT_TIMESTAMP);",
+		array($data['FirstName'],$data['MiddleName'],$data['LastName'],$data['Phone'],$data['Address'],$data['Email'],$data['BirthDate'],$data['Gender']));
 			$id=$this->db->insert_id();
 		$this->db->query("INSERT INTO `login` (`LoginID`, `Username`, `Password`, `EmployeeID`, `DateCreated`) VALUES (NULL, ?, ?, ?, CURRENT_TIMESTAMP);",array($data['Username'],password_hash($data['Password'], PASSWORD_BCRYPT),$this->db->insert_id()));
 		
@@ -67,9 +74,8 @@ class employee extends My_Controller {
 	public function update_employee(){
 		$data=$this->decode_json($this->input->post('data'));
 		$this->db->trans_start();
-		$this->db->query("UPDATE employee SET FirstName=?,MiddleName=?,LastName=? WHERE EmployeeID=?",array($data['FirstName'],$data['MiddleName'],$data['LastName'],$data['EmployeeID']));
+		$this->db->query("UPDATE employee SET FirstName=?,MiddleName=?,LastName=?,Phone=?,Address=?,Email=?,BirthDate=?,Gender=? WHERE EmployeeID=?",array($data['FirstName'],$data['MiddleName'],$data['LastName'],$data['Phone'],$data['Address'],$data['Email'],$data['BirthDate'],$data['Gender'],$data['EmployeeID']));
 		$this->db->query("UPDATE login SET Username=?,Password=? WHERE LoginID=?",array($data['Username'],password_hash($data['Password'], PASSWORD_BCRYPT),$data['LoginID']));
-		
 		$this->db->query("UPDATE role SET RoleTypeID=? WHERE LoginID=?",array($data['LoginID'],$data['RoleTypeID']));
 		$this->db->trans_complete();
 

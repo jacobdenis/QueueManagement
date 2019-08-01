@@ -22,11 +22,33 @@
 						<label  class="col-form-label">LastName:</label>
 						<input type="text" id="patient_lastname" name="LastName" required class="form-control" placeholder="LastName">
           </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label  class="col-form-label">Phone:</label>
+              <input type="text" id="patient_phone" name="Phone" required class="form-control" placeholder="Phone">
+            </div>
+            <div class="form-group col-md-6">
+              <label  class="col-form-label">Address:</label>
+              <input type="text" id="patient_address" name="Address" required class="form-control" placeholder="Address">
+            </div>
+            <div class="form-group col-md-6">
+              <label  class="col-form-label">BirthDate:</label>
+              <input type="date" id="patient_birthdate" name="BirthDate" required class="form-control" placeholder="BirthDate">
+            </div>
+            <div class="form-group col-md-6">
+              <label  class="col-form-label">Gender:</label>
+              <select name="Gender" id="patient_gender"  required class="form-control " >
+                <option value=""></option>
+                <option value="1">Female</option>
+                <option value="0">male</option>
+              </select>
+            </div>
+          </div>
           <div class="form-group ">
 						<label  class="col-form-label">PatientID:</label>
 						<input type="text" id="patient_ID" name="PatientID" required class="form-control" placeholder="PatientID">
           </div>
-         
+        
         </form>
       </div>
       <div class="modal-footer">

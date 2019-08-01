@@ -8,8 +8,7 @@
 		
 		<table id="employee_list" class="table table-striped table-bordered">
 		</table>
-
-		</div>
+		<?php $this->load->view('pages/content/profile1');?>
 		<!-- /# card -->
 	</div>
 	<!-- /# column -->
