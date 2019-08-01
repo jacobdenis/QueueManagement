@@ -304,7 +304,7 @@
 				render:function(data){
 					return `
 						<button type="button" data-id=${data.PatientID} class="delete_patient btn  btn-danger btn-sm btn-flat m-b-10 m-l-5"><span class="ti-trash"></span></button>
-						<button type="button" class="show_update_patient_modal btn  btn-warning btn-sm btn-flat m-b-10 m-l-5"><span class="ti-pencil"></span></button>
+						<button type="button" data-id=${data.PatientID} class="show_update_patient_modal btn  btn-warning btn-sm btn-flat m-b-10 m-l-5"><span class="ti-pencil"></span></button>
 					`;
 					}
 				}
@@ -316,8 +316,29 @@
 		$(document).on('click',"#show_add_patient_modal",function(){
 			$("#add_patient_modal").modal('show');
 		});
+		$(document).on('click',".show_update_patient_modal",function(){
+			var PatientID=$(this).data('id');
+			$("#patient_ID").val(PatientID);
+			$.ajax({
+				url:  base_url+'index.php/patient/get_patientlist_by_id',
+				dataType: 'json',
+				type: 'POST',
+				data: ({data:PatientID})
+			})      
+			.done(function (data) {
+				$.each( data, function( key, value ) {
+					$("#patient_firstname").val(value.FirstName);
+					$("#patient_middlename").val(value.MiddleName);
+					$("#patient_lastname").val(value.LastName);
+				});
+			})
+			$("#update_patient_modal").modal('show');
+		});
 		$(document).on('click',"#save_patient",function(){
 			updatedata("#add_patient_form",patientlist,'patient/add_patient');
+		});
+		$(document).on('click',"#update_patient",function(){
+			updatedata("#update_patient_form",patientlist,'patient/update_patient');
 		});
 		$(document).on('click',".delete_patient",function(){
 			data={

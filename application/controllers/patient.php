@@ -34,9 +34,24 @@ class patient extends My_Controller {
 		$query=$this->db->query($sql);
 		echo json_encode($query->result());
 	}
+	public function get_patientlist_by_id(){
+		$data=$this->input->post('data');
+		$sql='SELECT * From patient WHERE PatientID=?';
+		$query=$this->db->query($sql,array($data));
+		echo json_encode($query->result());
+	}
 	public function add_patient(){
 		$data=$this->decode_json($this->input->post('data'));
 		$this->db->insert('patient', $data);
+		if($this->db->affected_rows() >=0){
+			echo json_encode(true); //add your code here
+		}else{
+			echo json_encode(false); //add your your code here
+		}
+	}
+	public function update_patient(){
+		$data=$this->decode_json($this->input->post('data'));
+		$this->db->update('patient', $data);
 		if($this->db->affected_rows() >=0){
 			echo json_encode(true); //add your code here
 		}else{
