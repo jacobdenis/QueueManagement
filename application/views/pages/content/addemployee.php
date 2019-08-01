@@ -9,34 +9,36 @@
         </button>
       </div>
       <div class="modal-body">
-        <form class="form-horizontal" id="add_employee_form">
-							<!-- Information -->
-							<div class="form-group">
-								<label  class="col-form-label">FirstName:</label>
-								<input type="text" name="FirstName" class="form-control" placeholder="FirstName">
-							</div>
-							<div class="form-group">
-								<label  class="col-form-label">MiddleName:</label>
-								<input type="text" name="MiddleName" class="form-control" placeholder="MiddleName">
-							</div>
-							<div class="form-group">
-								<label  class="col-form-label">LastName:</label>
-								<input type="text" name="LastName" class="form-control" placeholder="LastName">
-							</div>
-							<!-- Password -->
-							<div class="form-group">
-								<label  class="col-form-label">Username:</label>
-								<input type="text" name="Username" class="form-control" placeholder="Username">
-							</div>
-							<div class="form-group">
-								<label  class="col-form-label">Password:</label>
-								<input type="password" name="Password" class="form-control" placeholder="Password">
-							</div>
-							<!-- Role -->
-							<div class="form-group">
-								<label  class="col-form-label">RoleType:</label>
-								<select name="RoleTypeID" class="js-states form-control roletype-select" ></select>
-							</div>
+        <form class="form-horizontal" id="add_employee_form" data-parsley-validate>
+			<!-- Information -->
+			<div class="form-group">
+				<label  class="col-form-label">FirstName:</label>
+				<input type="text" name="FirstName" required class="form-control" placeholder="FirstName">
+			</div>
+			<div class="form-group">
+				<label  class="col-form-label">MiddleName:</label>
+				<input type="text" name="MiddleName" class="form-control" placeholder="MiddleName">
+			</div>
+			<div class="form-group">
+				<label  class="col-form-label">LastName:</label>
+				<input type="text" name="LastName" required class="form-control" placeholder="LastName">
+			</div>
+			<!-- Password -->
+			<div class="form-group">
+				<label  class="col-form-label">Username:</label>
+				<input type="text" name="Username" required class="form-control" placeholder="Username">
+			</div>
+			<div class="form-group">
+				<label  class="col-form-label">Password:</label>
+				<input type="password" name="Password" required class="form-control" placeholder="Password">
+			</div>
+			<!-- Role -->
+			<div class="form-group">
+				<label  class="col-form-label">RoleType:</label>
+				<select name="RoleTypeID"  required class="js-states form-control roletype-select" >
+					<option value=""></option>
+				</select>
+			</div>
          
         </form>
       </div>

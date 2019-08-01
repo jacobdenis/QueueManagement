@@ -9,18 +9,18 @@
         </button>
       </div>
       <div class="modal-body">
-        <form class="form-horizontal" id="add_patient_form">
+        <form class="form-horizontal" id="add_patient_form" data-parsley-validate>
           <div class="form-group">
-				<label  class="col-form-label">FirstName:</label>
-				<input type="text" name="FirstName" class="form-control" placeholder="FirstName">
+						<label  class="col-form-label">FirstName:</label>
+						<input type="text" name="FirstName" required class="form-control" placeholder="FirstName">
           </div>
           <div class="form-group">
-				<label  class="col-form-label">MiddleName:</label>
-				<input type="text" name="MiddleName" class="form-control" placeholder="MiddleName">
+						<label  class="col-form-label">MiddleName:</label>
+						<input type="text" name="MiddleName" required class="form-control" placeholder="MiddleName">
           </div>
           <div class="form-group">
-				<label  class="col-form-label">LastName:</label>
-				<input type="text" name="LastName" class="form-control" placeholder="LastName">
+						<label  class="col-form-label">LastName:</label>
+						<input type="text" name="LastName" required class="form-control" placeholder="LastName">
           </div>
          
         </form>

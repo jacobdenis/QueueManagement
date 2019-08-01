@@ -10,20 +10,19 @@
         </button>
       </div>
       <div class="modal-body">
-        <form class="form-horizontal" id="update_system_form">    
+        <form class="form-horizontal" id="update_system_form" data-parsley-validate>    
            
           <div class="form-group">
-				<label  class="col-form-label">SystemName:</label>
-				<input type="text" id="system_name" class="form-control" placeholder="FirstName">
+						<label  class="col-form-label">SystemName:</label>
+						<input type="text" id="system_name" class="form-control" required placeholder="FirstName">
           </div>
           <div class="form-group">
-				<label  class="col-form-label">SystemValue:</label>
-				<input type="text" id="system_value" name="SystemValue" class="form-control" placeholder="SystemValue">
+						<label  class="col-form-label">SystemValue:</label>
+						<input type="text" id="system_value" name="SystemValue" required class="form-control" placeholder="SystemValue">
           </div>
           <div class="form-group">
-				
-				<input type="text" name="SystemSettingID" id="system_setting_id" readonly class="form-control hidden" placeholder="SystemSettingID">
-            </div>
+							<input type="text" name="SystemSettingID" id="system_setting_id" required readonly class="form-control hidden" placeholder="SystemSettingID">
+          </div>
         </form>
       </div>
       <div class="modal-footer">

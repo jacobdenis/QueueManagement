@@ -10,13 +10,13 @@
         </button>
       </div>
       <div class="modal-body">
-        <form class="form-horizontal" id="update_roletype_form">    
+        <form class="form-horizontal" id="update_roletype_form" data-parsley-validate>    
           <div class="form-group">
 				<label  class="col-form-label">RoleType:</label>
-				<input type="text" id="role_type" name="RoleType" class="form-control" placeholder="RoleType">
+				<input type="text" id="role_type" name="RoleType" required class="form-control" placeholder="RoleType">
           </div>
           <div class="form-group">
-				<input type="text" name="RoleTypeID" id="role_type_id" readonly class="form-control hidden" placeholder="RoleTypeID">
+				<input type="text" name="RoleTypeID" id="role_type_id" required readonly class="form-control hidden" placeholder="RoleTypeID">
             </div>
         </form>
       </div>

@@ -1,45 +1,5 @@
 
-<style>
 
-.l-wrap {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 30px 0;
-}
-
-/* Parsley CSS */
-
-.parsley-success {
-  color: #468847;
-  background-color: #DFF0D8;
-  border: 1px solid #D6E9C6;
-}
-
-.parsley-error {
-  color: red;
-  background-color: #F2DEDE;
-  border: 1px solid #EED3D7;
-}
-
-.parsley-errors-list {
-  margin: 2px 0 3px;
-  padding: 0;
-  list-style-type: none;
-  font-size: 0.9em;
-  line-height: 0.9em;
-  opacity: 0;
-
-  transition: all .3s ease-in;
-  -o-transition: all .3s ease-in;
-  -moz-transition: all .3s ease-in;
-  -webkit-transition: all .3s ease-in;
-}
-
-.parsley-errors-list.filled {
-  opacity: 1;
-}
-
-</style>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -68,6 +28,11 @@
     <link href="<?php echo base_url()?>assets/css/lib/bootstrap.min.css" rel="stylesheet">
     <link href="<?php echo base_url()?>assets/css/lib/helper.css" rel="stylesheet">
     <link href="<?php echo base_url()?>assets/css/style.css" rel="stylesheet">
+		<!-- SweetAlert -->
+		<link href="<?php echo base_url()?>assets/css/lib/sweetalert/sweetalert.css" rel="stylesheet">
+		<script src="<?php echo base_url()?>assets/js/lib/sweetalert/sweetalert.min.js"></script>
+
+		
 </head>
 
 <body class="bg-primary">
@@ -102,6 +67,46 @@
 
 </body>
 
+<style>
+
+		.l-wrap {
+		max-width: 600px;
+		margin: 0 auto;
+		padding: 30px 0;
+		}
+
+		/* Parsley CSS */
+
+		.parsley-success {
+		color: #468847;
+		background-color: #DFF0D8;
+		border: 1px solid #D6E9C6;
+		}
+
+		.parsley-error {
+		color: red;
+		background-color: #F2DEDE;
+		border: 1px solid #EED3D7;
+		}
+
+		.parsley-errors-list {
+		margin: 2px 0 3px;
+		padding: 0;
+		list-style-type: none;
+		font-size: 0.9em;
+		line-height: 0.9em;
+		opacity: 0;
+
+		transition: all .3s ease-in;
+		-o-transition: all .3s ease-in;
+		-moz-transition: all .3s ease-in;
+		-webkit-transition: all .3s ease-in;
+		}
+
+		.parsley-errors-list.filled {
+		opacity: 1;
+}
+</style>
 </html>
 <script>
 	var base_url="<?php echo base_url()?>";

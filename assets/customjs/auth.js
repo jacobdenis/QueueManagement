@@ -10,7 +10,7 @@
 			});
 			return inputarray;
 		}else{
-			$(".parsley-required").addClass('btn-danger');
+			// $(".parsley-required").css('background-color','#red');
 			return false;
 		}
 	}
@@ -27,7 +27,7 @@
 				if(data==1){
 					window.location.href = base_url+"index.php/dashboard";
 				}else{
-					
+					swal("Failed","No registered user please check you username or password","error");
 				}
 				
 			})
