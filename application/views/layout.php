@@ -110,8 +110,8 @@
 									<?php echo ucfirst($this->EmployeeInformation['LastName']).', '.ucfirst($this->EmployeeInformation['FirstName'])?>
 									</button>
 									<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-										<a class="dropdown-item" href="<?php echo base_url('index.php/login/logout');?>">Logout</a>
 										<a class="dropdown-item" href="<?php echo base_url('index.php/employee/profile');?>">Profile</a>
+										<a class="dropdown-item" href="<?php echo base_url('index.php/login/logout');?>">Logout</a>
 									</div>
 									</div>
                            
