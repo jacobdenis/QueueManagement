@@ -1,5 +1,5 @@
 
-<div class="modal fade" id="add_employee_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="update_employee_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -39,12 +39,20 @@
 					<option value=""></option>
 				</select>
 			</div>
+			<div class="form-group hidden">
+				<label  class="col-form-label">EmployeeID:</label>
+				<input type="text" readonly id="employee_ID" name="EmployeeID" required class="form-control" placeholder="EmployeeID">
+			</div>
+			<div class="form-group hidden">
+				<label  class="col-form-label">LoginID:</label>
+				<input type="text" readonly id="employee_LoginID" name="LoginID" required class="form-control" placeholder="EmployeeID">
+			</div>
          
         </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" id="save_employee" class="btn btn-primary">Save Changes</button>
+        <button type="button" id="update_employee" class="btn btn-primary">Save Changes</button>
       </div>
     </div>
   </div>

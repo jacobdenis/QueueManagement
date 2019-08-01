@@ -385,7 +385,7 @@
 				render:function(data){
 					return `
 					<button type="button"  data-id="${data.EmployeeID}"  class="btn btn-danger btn-sm btn-flat m-b-10 m-l-5 delete_employee"><span class="ti-trash"></span></button>
-					<button type="button" class="btn  btn-warning btn-sm btn-flat m-b-10 m-l-5"><span class="ti-pencil"></span></button>
+					<button type="button" data-id="${data.EmployeeID}"   class="btn  btn-warning btn-sm btn-flat m-b-10 m-l-5 show_update_employee_modal"><span class="ti-pencil"></span></button>
 					`;
 					}
 				}
@@ -410,8 +410,47 @@
 			
 			$("#add_employee_modal").modal('show');
 		});
+		$(document).on('click',".show_update_employee_modal",function(){
+			var EmployeeID=$(this).data('id');
+			$("#employee_ID").val(EmployeeID);
+			$.ajax({
+				url:  base_url+'index.php/employee/get_select',
+				dataType: 'json',
+				type: 'POST',
+				data: ({})
+			})      
+			.done(function (data) {
+				$('.roletype-select').select2({
+					dropdownParent: $("#update_employee_modal"),
+					placeholder: 'Select RoleType',
+					data:data.roletype
+				});
+			})
+
+			$.ajax({
+				url:  base_url+'index.php/employee/get_employee_by_id',
+				dataType: 'json',
+				type: 'POST',
+				data: ({data:EmployeeID})
+			})      
+			.done(function (data) {
+				$.each( data, function( key, value ) {	
+					$("#employee_firstname").val(value.FirstName);
+					$("#employee_middlename").val(value.MiddleName);
+					$("#employee_lastname").val(value.LastName);
+					$("#employee_username").val(value.Username);
+					$("#employee_password").val(value.Password);
+					$("#employee_LoginID").val(value.LoginID);
+					$('#employee_roletypeid').val(value.RoleTypeID).trigger('change');
+				});
+			})
+			$("#update_employee_modal").modal('show');
+		});
 		$(document).on('click',"#save_employee",function(){
 			updatedata("#add_employee_form",employee_list,'employee/add_employee');
+		});
+		$(document).on('click',"#update_employee",function(){
+			updatedata("#update_employee_form",employee_list,'employee/update_employee');
 		});
 		$(document).on('click',".delete_employee",function(){
 			data={

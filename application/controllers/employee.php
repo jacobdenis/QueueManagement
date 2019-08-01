@@ -37,6 +37,16 @@ class employee extends My_Controller {
 		$query=$this->db->query($sql);
 		echo json_encode($query->result());
 	}
+	public function get_employee_by_id(){
+		$data=$this->input->post('data');
+		$sql="SELECT * from employee as a 
+		INNER JOIN login as b ON a.EmployeeID=b.EmployeeID 
+		INNER JOIN role as c ON b.LoginID=c.LoginID
+		INNER JOIN roletype as d ON c.RoleTypeID=d.RoleTypeID WHERE a.EmployeeID=?";
+		$query=$this->db->query($sql,array($data));
+		echo json_encode($query->result());
+
+	}
 	public function add_employee(){
 		$data=$this->decode_json($this->input->post('data'));
 		$this->db->trans_start();
@@ -46,6 +56,21 @@ class employee extends My_Controller {
 		$this->db->query("INSERT INTO `login` (`LoginID`, `Username`, `Password`, `EmployeeID`, `DateCreated`) VALUES (NULL, ?, ?, ?, CURRENT_TIMESTAMP);",array($data['Username'],password_hash($data['Password'], PASSWORD_BCRYPT),$this->db->insert_id()));
 		
 		$this->db->query("INSERT INTO `role` (`RoleID`, `LoginID`, `RoleTypeID`) VALUES (NULL, ?, ?);",array($this->db->insert_id(),$data['RoleTypeID']));
+		$this->db->trans_complete();
+
+		if($this->db->affected_rows() >=0){
+			echo json_encode(true); //add your code here
+		}else{
+			echo json_encode(false); //add your your code here
+		}
+	}
+	public function update_employee(){
+		$data=$this->decode_json($this->input->post('data'));
+		$this->db->trans_start();
+		$this->db->query("UPDATE employee SET FirstName=?,MiddleName=?,LastName=? WHERE EmployeeID=?",array($data['FirstName'],$data['MiddleName'],$data['LastName'],$data['EmployeeID']));
+		$this->db->query("UPDATE login SET Username=?,Password=? WHERE LoginID=?",array($data['Username'],password_hash($data['Password'], PASSWORD_BCRYPT),$data['LoginID']));
+		
+		$this->db->query("UPDATE role SET RoleTypeID=? WHERE LoginID=?",array($data['LoginID'],$data['RoleTypeID']));
 		$this->db->trans_complete();
 
 		if($this->db->affected_rows() >=0){

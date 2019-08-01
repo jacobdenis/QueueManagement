@@ -15,3 +15,4 @@
 	<!-- /# column -->
 </div>
 <?php $this->load->view('pages/content/addemployee');?>
+<?php $this->load->view('pages/content/updateemployee');?>
