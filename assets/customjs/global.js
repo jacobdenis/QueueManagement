@@ -158,6 +158,23 @@
 	
 	if(url=="receptionist"){
 		var queuelist=$("#queuelist").DataTable({
+			dom: 'Blfrtip',
+        	buttons: [
+            {
+				extend:'collection',
+				text:'Export',
+				buttons:[
+					'csv',
+					'excel',
+					'print',
+					'pdf'
+				],
+                exportOptions: {
+                    columns: ':visible'
+                }
+			},
+            'colvis'
+        ],
 			ajax: {
 				url: base_url+'index.php/receptionist/get_queuelist',
 				dataType: 'json',
@@ -172,6 +189,11 @@
 				{ "title":"Status",	"data": "Status"	},
 				{ "title":"CheckupType",	"data": "CheckupType"	},
 				{ "title":"Queue",	"data": "QueueID"	},
+				{ "title":"Date",	"data": null,
+					render:function(data){
+						return moment().format('dddd')+' | '+moment(data.DateCreated).format("YYYY-MM-DD");
+					}
+				},
 				{ "title":"Action","data":null,
 					render:function(data){
 							if(data.Status=="Pending"){
@@ -249,6 +271,23 @@
 	}
 	if(url=="patient"){
 		var patientlist=$("#patient_list").DataTable({
+			dom: 'Blfrtip',
+        	buttons: [
+            {
+				extend:'collection',
+				text:'Export',
+				buttons:[
+					'csv',
+					'excel',
+					'print',
+					'pdf'
+				],
+                exportOptions: {
+                    columns: ':visible'
+                }
+			},
+            'colvis'
+        ],
 			ajax: {
 				url: base_url+'index.php/patient/get_patientlist',
 				dataType: 'json',
@@ -289,6 +328,23 @@
 	}
 	if(url=="employee"){
 		var employee_list=$("#employee_list").DataTable({
+			dom: 'Blfrtip',
+        	buttons: [
+            {
+				extend:'collection',
+				text:'Export',
+				buttons:[
+					'csv',
+					'excel',
+					'print',
+					'pdf'
+				],
+                exportOptions: {
+                    columns: ':visible'
+                }
+			},
+            'colvis'
+        ],
 			ajax: {
 				url: base_url+'index.php/employee/get_employeelist',
 				dataType: 'json',
@@ -344,7 +400,24 @@
 		});
 	}
 	if(url2=="accesslist"){
-		var employee_list=$("#access_list").DataTable({
+		var access_list=$("#access_list").DataTable({
+			dom: 'Blfrtip',
+        	buttons: [
+            {
+				extend:'collection',
+				text:'Export',
+				buttons:[
+					'csv',
+					'excel',
+					'print',
+					'pdf'
+				],
+                exportOptions: {
+                    columns: ':visible'
+                }
+			},
+            'colvis'
+        ],
 			ajax: {
 				url: base_url+'index.php/managesystem/get_access_list',
 				dataType: 'json',
@@ -363,8 +436,7 @@
 				{ "title":"Action","data":null,
 				render:function(data){
 					return `
-					<button type="button"  data-id="${data.EmployeeID}"  class="btn btn-danger btn-sm btn-flat m-b-10 m-l-5 delete_employee"><span class="ti-trash"></span></button>
-					<button type="button" class="btn  btn-warning btn-sm btn-flat m-b-10 m-l-5"><span class="ti-pencil"></span></button>
+					<button type="button"  data-id="${data.AccessControlID}"  class="btn btn-danger btn-sm btn-flat m-b-10 m-l-5 delete_access_control"><span class="ti-trash"></span></button>
 					`;
 					}
 				}
@@ -372,7 +444,253 @@
 			],
 			responsive:true
 		});
+		$(document).on('click',".delete_access_control",function(){
+			data={
+				"AccessControlID":$(this).data('id'),
+			}
+			deletedata(data,access_list,'managesystem/delete_accesslist');
+		});
+		$(document).on('click',"#show_add_access_modal",function(){
+			$.ajax({
+				url:  base_url+'index.php/managesystem/get_select',
+				dataType: 'json',
+				type: 'POST',
+				data: ({})
+			})      
+			.done(function (data) {
+				$('.module-select').select2({
+					dropdownParent: $("#add_access_modal"),
+					placeholder: 'Select Module',
+					data:data.get_module
+				});
+				$('.employee-select').select2({
+					dropdownParent: $("#add_access_modal"),
+					placeholder: 'Select Employee',
+					data:data.get_employee
+				});
+			})
+			
+			$("#add_access_modal").modal('show');
+		});
+		$(document).on('click',"#save_access",function(){
+			updatedata("#add_access_form",access_list,'managesystem/add_access');
+		});
+		
 	}
+	if(url2=="system"){
+		var system_list=$("#system_list").DataTable({
+			dom: 'Blfrtip',
+        	buttons: [
+            {
+				extend:'collection',
+				text:'Export',
+				buttons:[
+					'csv',
+					'excel',
+					'print',
+					'pdf'
+				],
+                exportOptions: {
+                    columns: ':visible'
+                }
+			},
+            'colvis'
+        ],
+			ajax: {
+				url: base_url+'index.php/managesystem/get_system_list',
+				dataType: 'json',
+				type: 'POST',
+				data: ({}),
+				dataSrc:'',
+			},
+			columns: [ 
+				{ "title":"SystemSettingID",	"data": "SystemSettingID"	},
+				{ "title":"SystemName",	"data": "SystemName"	},
+				{ "title":"SystemValue",	"data": "SystemValue"	},
+				{ "title":"Action","data":null,
+				render:function(data){
+					return `
+						<button type="button"  data-id="${data.SystemSettingID}" id="show_update_system_modal" class="btn  btn-warning btn-sm btn-flat m-b-10 m-l-5"><span class="ti-pencil"></span></button>
+					`;
+					}
+				}
+	
+			],
+			responsive:true
+		});
+		$(document).on('click',"#show_update_system_modal",function(){
+			$("#system_setting_id").val($(this).data('id'));
+			$.ajax({
+				url:  base_url+'index.php/managesystem/get_system_list',
+				dataType: 'json',
+				type: 'POST',
+				data: ({})
+			})      
+			.done(function (data) {
+				$.each( data, function( key, value ) {
+					$("#system_name").val(value.SystemName);
+					$("#system_value").val(value.SystemValue);
+				});
+			})
+			$("#update_system_modal").modal('show');
+		});
+		$(document).on('click',"#update_system",function(){
+			updatedata("#update_system_form",system_list,'managesystem/update_system');
+		});
+		
+	}
+	if(url2=="roletype"){
+		var roletype_list=$("#roletype_list").DataTable({
+			dom: 'Blfrtip',
+        	buttons: [
+            {
+				extend:'collection',
+				text:'Export',
+				buttons:[
+					'csv',
+					'excel',
+					'print',
+					'pdf'
+				],
+                exportOptions: {
+                    columns: ':visible'
+                }
+			},
+            'colvis'
+        ],
+			ajax: {
+				url: base_url+'index.php/managesystem/get_roletype_list',
+				dataType: 'json',
+				type: 'POST',
+				data: ({}),
+				dataSrc:'',
+			},
+			columns: [ 
+				{ "title":"RoleTypeID",	"data": "RoleTypeID"	},
+				{ "title":"RoleType",	"data": "RoleType"	},
+				{ "title":"Action","data":null,
+				render:function(data){
+					return `
+					<button type="button" data-id="${data.RoleTypeID}" id="show_update_roletype_modal" class="btn  btn-warning btn-sm btn-flat m-b-10 m-l-5"><span class="ti-pencil"></span></button>
+					`;
+					}
+				}
+	
+			],
+			responsive:true
+		});
+		$(document).on('click',"#show_update_roletype_modal",function(){
+			var RoleTypeID=($(this).data('id'));
+			$.ajax({
+				url:  base_url+'index.php/managesystem/get_roletype_list_by_id',
+				dataType: 'json',
+				type: 'POST',
+				data: ({data:RoleTypeID})
+			})      
+			.done(function (data) {
+				$.each( data, function( key, value ) {
+					$("#role_type").val(value.RoleType);
+					$("#role_type_id").val(value.RoleTypeID);
+				});
+			})
+			$("#update_roletype_modal").modal('show');
+		});
+		$(document).on('click',"#update_system",function(){
+			updatedata("#update_roletype_form",roletype_list,'managesystem/update_roletype_by_id');
+		});
+	}
+	if(url2=="status"){
+		var status_list=$("#status_list").DataTable({
+			dom: 'Blfrtip',
+        	buttons: [
+            {
+				extend:'collection',
+				text:'Export',
+				buttons:[
+					'csv',
+					'excel',
+					'print',
+					'pdf'
+				],
+                exportOptions: {
+                    columns: ':visible'
+                }
+			},
+            'colvis'
+        ],
+			ajax: {
+				url: base_url+'index.php/managesystem/get_status_list',
+				dataType: 'json',
+				type: 'POST',
+				data: ({}),
+				dataSrc:'',
+			},
+			columns: [ 
+				{ "title":"StatusID",	"data": "StatusID"	},
+				{ "title":"Status",	"data": "Status"	}
+			],
+			responsive:true
+		});
+	}
+	if(url2=="module"){
+		var module_list=$("#module_list").DataTable({
+			dom: 'Blfrtip',
+        	buttons: [
+            {
+				extend:'collection',
+				text:'Export',
+				buttons:[
+					'csv',
+					'excel',
+					'print',
+					'pdf'
+				],
+                exportOptions: {
+                    columns: ':visible'
+                }
+			},
+            'colvis'
+        ],
+			ajax: {
+				url: base_url+'index.php/managesystem/get_module_list',
+				dataType: 'json',
+				type: 'POST',
+				data: ({}),
+				dataSrc:'',
+			},
+			columns: [ 
+				{ "title":"ControllerID",	"data": "ControllerID"	},
+				{ "title":"ControllerName",	"data": "ControllerName"}
+			],
+			responsive:true
+		});
+	}
+	if(url=="dashboard"){
+		
+		setInterval(function(){
+			dashboard();
+		}, 1000);
+		
+		
+	}
+function  dashboard(){
+	$.ajax({
+		url:  base_url+'index.php/dashboard/get_queue_dashboard',
+		dataType: 'json',
+		type: 'POST',
+		data: ({})
+	})      
+	.done(function (data) {
+	//	$.each( data, function( key, value ) {
+			$(".totat-patient").text(data.get_total_active_patient[0].active_total_patient);
+			$(".animal-bite").text(data.get_total_active_patient_animal_bite[0].active_total_patient);
+			$(".family-med").text(data.get_total_active_patient_family_med[0].active_total_patient);
+			$(".family-plan").text(data.get_total_active_patient_family_plan[0].active_total_patient);
+			
+			
+		//});
+	})
+}
 })(jQuery);
 
 

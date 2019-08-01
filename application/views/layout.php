@@ -14,7 +14,13 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Focus Admin: Creative Admin Dashboard</title>
+        <title><?php 
+								foreach ($this->systemsetting as  $value) {
+									if($value->SystemName=='SystemName'){
+										echo $value->SystemValue;
+									}
+								}
+							?></title>
         <link href="<?php echo base_url()?>assets/css/lib/calendar2/pignose.calendar.min.css" rel="stylesheet">
         <link href="<?php echo base_url()?>assets/css/lib/chartist/chartist.min.css" rel="stylesheet">
         <link href="<?php echo base_url()?>assets/css/lib/font-awesome.min.css" rel="stylesheet">
@@ -29,6 +35,7 @@
 		<!-- DataTable Css  -->
 		<link href="<?php echo base_url()?>assets/css/lib/datatables/css/dataTables.bootstrap4.min.css" rel="stylesheet">
 		<link href="<?php echo base_url()?>assets/css/lib/datatables/css/responsive.bootstrap4.min.css" rel="stylesheet">
+		<link href="<?php echo base_url()?>assets/css/lib/datatables/css/buttons.bootstrap4.min.css" rel="stylesheet">
 		
 		
         <link href="<?php echo base_url()?>assets/css/lib/helper.css" rel="stylesheet">
@@ -116,7 +123,18 @@
 		<script src="<?php echo base_url()?>assets/js/lib/datatables/js/jquery.dataTables.min.js"> </script>	
 		<script src="<?php echo base_url()?>assets/js/lib/datatables/js/dataTables.bootstrap4.min.js"> </script>	
 		<script src="<?php echo base_url()?>assets/js/lib/datatables/js/dataTables.responsive.min.js"> </script>	
-		<script src="<?php echo base_url()?>assets/js/lib/datatables/js/responsive.bootstrap4.min.js"> </script>	
+		<script src="<?php echo base_url()?>assets/js/lib/datatables/js/responsive.bootstrap4.min.js"> </script>	                
+		<script src="<?php echo base_url()?>assets/js/lib/datatables/js/dataTables.buttons.min.js"> </script>	
+		<script src="<?php echo base_url()?>assets/js/lib/datatables/js/buttons.bootstrap4.min.js"> </script>	
+
+		<script src="<?php echo base_url()?>assets/js/lib/datatables/js/jszip.min.js"> </script>	
+		<script src="<?php echo base_url()?>assets/js/lib/datatables/js/pdfmake.min.js"> </script>	
+		<script src="<?php echo base_url()?>assets/js/lib/datatables/js/vfs_fonts.js"> </script>	
+		<script src="<?php echo base_url()?>assets/js/lib/datatables/js/buttons.html5.min.js"> </script>	
+		<script src="<?php echo base_url()?>assets/js/lib/datatables/js/buttons.print.min.js"> </script>	
+		<script src="<?php echo base_url()?>assets/js/lib/datatables/js/buttons.colVis.min.js"> </script>	
+        <!-- Moment Js -->
+		<script src="<?php echo base_url()?>assets/js/lib/moment/moment.js"> </script>	
 
 
 
@@ -124,7 +142,10 @@
 		<!-- Select2 -->
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js"></script>
 
-		<script src="<?php echo base_url('assets/customjs/global.js?nocache='.date('YYYY-MM-DD H:i:s').'')?>"></script>
+        <script src="<?php echo base_url('assets/customjs/global.js?nocache='.date('YYYY-MM-DD H:i:s').'')?>"></script>
+        
+        <script src="<?php echo base_url()?>assets/js/lib/chartist/chartist.min.js"></script>
+        <script src="<?php echo base_url()?>assets/js/dashboard2.js"></script>
 
 
     </body>

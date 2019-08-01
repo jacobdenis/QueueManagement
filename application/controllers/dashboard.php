@@ -29,4 +29,22 @@ class dashboard extends My_Controller {
 		$this->data['view']='dashboard/index';
 		$this->load->view('layout',$this->data);
 	}
+	public function get_total_active_patient(){
+		$sql="SELECT count(QueueID) as active_total_patient FROM queue WHERE StatusID=1";
+		$query=$this->db->query($sql);
+		return $query->result();
+	}
+	public function get_total_active_patient_by_clinic($id){
+		$sql="SELECT count(QueueID) as active_total_patient FROM queue WHERE StatusID=1 AND ClinicID=?";
+		$query=$this->db->query($sql,array($id));
+		return $query->result();
+	}
+	public function get_queue_dashboard(){
+		$response['get_total_active_patient']=$this->get_total_active_patient();
+		$response['get_total_active_patient_animal_bite']=$this->get_total_active_patient_by_clinic(1);
+		$response['get_total_active_patient_family_med']=$this->get_total_active_patient_by_clinic(2);
+		$response['get_total_active_patient_family_plan']=$this->get_total_active_patient_by_clinic(3);
+		echo json_encode($response);
+	}
+	
 }

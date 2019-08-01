@@ -4,7 +4,7 @@ class Access_Control_model extends CI_Model {
 	public function get_access_control($module=NULL)
 	{
 		
-		$sql = "SELECT * FROM accesscontrol WHERE loginID=? AND ControllerName=?";
+		$sql = "SELECT * FROM accesscontrol as a INNER JOIN controller as b ON a.ControllerName=b.ControllerID WHERE a.loginID=? AND b.ControllerName=?";
 		$query=$this->db->query($sql,array($this->mysession['LoginID'],$module));
 		return $query->row_array();
 

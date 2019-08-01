@@ -30,7 +30,7 @@ class receptionist extends My_Controller {
 		$this->load->view('layout',$this->data);
 	}
 	public function get_queuelist(){
-		$sql="SELECT  a.QueueID,f.Clinic,
+		$sql="SELECT a.DateCreated, a.QueueID,f.Clinic,
 		CONCAT(c.LastName,', ', c.FirstName) as PatientName ,
 		CONCAT(b.LastName,', ', b.FirstName) as DoctorName,
 		e.Status,d.CheckupType,a.DateCreated
