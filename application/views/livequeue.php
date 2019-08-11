@@ -1,5 +1,20 @@
 <style>
 .select2-container{ width: 100% !important; }
+
+
+.clock {
+  height: 100px;
+  width: 70%;
+  line-height: 100px;  
+  margin: 150px auto 0;
+  padding: 0 50px;
+  background: #222;
+  color: #eee;
+  text-align: center;
+  border-radius: 15px;
+  box-shadow: 0 0 7px #222;
+  text-shadow: 0 0 3px #fff;
+}
 </style>
 
 <script>
@@ -52,7 +67,9 @@
 								}
 						
 						?></h1>
+						<h1 id="clock" class="clock">loading ...</h1>
 		<div class="row">
+				
 			<div class="col-12 col-md-12 <?php  if($this->uri->segment(2)=='animalbite'){}else{echo 'hidden';}?>">
 				<h3 class="text-center">Animal Bite Treatment Center</h3>
 				<div id="active_queue_list_animal_bite">
@@ -103,12 +120,17 @@
 
 		<script src="<?php echo base_url('assets/customjs/global.js?nocache='.date('YYYY-MM-DD H:i:s').'')?>"></script>
 
-
+		<script src="<?php echo base_url()?>assets/js/lib/moment/moment.js"> </script>	
     </body>
 
 </html>
 
 <script>
+
+function update() {
+  $('#clock').html(moment().format(' H:mm:ss'));
+}
+setInterval(update, 1000);
 	(function ($) {  
 		function livequeue(){
 			$.ajax({
