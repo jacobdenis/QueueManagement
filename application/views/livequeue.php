@@ -5,6 +5,7 @@
 <script>
 	var base_url="<?php echo base_url()?>";
 	var url="<?php echo $this->uri->segment(1)?>";
+	var url2="<?php echo $this->uri->segment(2)?>";
 </script>
 <!DOCTYPE html>
 <html lang="en">
@@ -52,18 +53,18 @@
 						
 						?></h1>
 		<div class="row">
-			<div class="col-6 col-md-4">
-			<h3 >Animal Bite Treatment Center</h3>
+			<div class="col-12 col-md-12 <?php  if($this->uri->segment(2)=='animalbite'){}else{echo 'hidden';}?>">
+				<h3 class="text-center">Animal Bite Treatment Center</h3>
 				<div id="active_queue_list_animal_bite">
 				</div>
 			</div>
-			<div class="col-6 col-md-4">
-			<h3 >Family Medicine</h3>
+			<div class="col-12 col-md-12 <?php  if($this->uri->segment(2)=='familymed'){}else{echo 'hidden';}?>">
+				<h3 class="text-center">Family Medicine</h3>
 				<div id="active_queue_list_family_med">
 				</div>
 			</div>
-			<div class="col-6 col-md-4">
-			<h3> Family Planning</h3>
+			<div class="col-12 col-md-12 <?php  if($this->uri->segment(2)=='familyplan'){}else{echo 'hidden';}?>">
+				<h3 class="text-center"> Family Planning</h3>
 				<div id="active_queue_list_family_plan">
 				</div>
 			</div>
@@ -120,56 +121,63 @@
 				$("#active_queue_list_animal_bite").html('');
 				$("#active_queue_list_family_med").html('');
 				$("#active_queue_list_family_plan").html('');
-				$.each( data.animal, function( key, value ) {
+				if(url2=='animalbite'){
+					$.each( data.animal, function( key, value ) {
 					$("#active_queue_list_animal_bite").append(`
-					<div class="card w-75">
-						<div class="card-body">
-							<h1 >${value.QueueID}</h1>
-							<h5 class="media-heading">Patient Name: ${value.PatientName}</h5>
-							<h5 class="media-heading">Doctor Name: ${value.DoctorName}</h5>
-							<div class="comment-action">
-								<div class="badge badge-warning">Pending</div>
-								<span class="m-l-10">
-							</span>
+						<div class="card ">
+							<div class="card-body">
+								<h1 >${value.QueueID}</h1>
+								<h5 class="media-heading">Patient Name: ${value.PatientName}</h5>
+								<h5 class="media-heading">Doctor Name: ${value.DoctorName}</h5>
+								<div class="comment-action">
+									<div class="badge badge-warning">Pending</div>
+									<span class="m-l-10">
+								</span>
+								</div>
 							</div>
 						</div>
-					</div>
-					`);
-				});
-				$.each( data.family_med, function( key, value ) {
-					$("#active_queue_list_family_med").append(`
-					<div class="card w-75">
-						<div class="card-body">
-							<h1 >${value.QueueID}</h1>
-							<h5 class="media-heading">Patient Name: ${value.PatientName}</h5>
-							<h5 class="media-heading">Doctor Name: ${value.DoctorName}</h5>
-							<div class="comment-action">
-								<div class="badge badge-warning">Pending</div>
-								<span class="m-l-10">
-							</span>
+						`);
+					});
+				}
+				if(url2=='familymed'){
+					$.each( data.family_med, function( key, value ) {
+						$("#active_queue_list_family_med").append(`
+						<div class="card ">
+							<div class="card-body">
+								<h1 >${value.QueueID}</h1>
+								<h5 class="media-heading">Patient Name: ${value.PatientName}</h5>
+								<h5 class="media-heading">Doctor Name: ${value.DoctorName}</h5>
+								<div class="comment-action">
+									<div class="badge badge-warning">Pending</div>
+									<span class="m-l-10">
+								</span>
+								</div>
 							</div>
 						</div>
-					</div>
-					`);
-				});
-				$.each( data.family_plan, function( key, value ) {
-					$("#active_queue_list_family_plan").append(`
+						`);
+					});
+				}
+				if(url2=='familyplan'){
+					$.each( data.family_plan, function( key, value ) {
+						$("#active_queue_list_family_plan").append(`
 
-					<div class="card w-75">
-						<div class="card-body">
-							<h1 >${value.QueueID}</h1>
-							<h5 class="media-heading">Patient Name: ${value.PatientName}</h5>
-							<h5 class="media-heading">Doctor Name: ${value.DoctorName}</h5>
-							<div class="comment-action">
-								<div class="badge badge-warning">Pending</div>
-								<span class="m-l-10">
-							</span>
+						<div class="card ">
+							<div class="card-body">
+								<h1 >${value.QueueID}</h1>
+								<h5 class="media-heading">Patient Name: ${value.PatientName}</h5>
+								<h5 class="media-heading">Doctor Name: ${value.DoctorName}</h5>
+								<div class="comment-action">
+									<div class="badge badge-warning">Pending</div>
+									<span class="m-l-10">
+								</span>
+								</div>
 							</div>
 						</div>
-					</div>
-							
-					`);
-				});
+								
+						`);
+					});
+				}
+				
 			})
 		}
 		setInterval(function(){

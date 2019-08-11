@@ -576,10 +576,6 @@
 			columns: [ 
 				{ "title":"FullName",	"data": "FullName"	},
 				{ "title":"Module",	"data": "ControllerName"	},
-				{ "title":"Create",	"data": "Create"	},
-				{ "title":"Read",	"data": "Read"	},
-				{ "title":"Update",	"data": "Update"	},
-				{ "title":"Delete",	"data": "Delete"	},
 				{ "title":"DateCreated",	"data": "DateCreated"	},
 				{ "title":"Action","data":null,
 				render:function(data){

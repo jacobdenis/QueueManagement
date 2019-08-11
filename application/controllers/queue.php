@@ -23,7 +23,17 @@ class queue extends My_Controller {
 		$this->load->model('Auth_model','Auth');
 		$this->load->model('Access_Control_model','AC');
 	}//end of __construct
-	public function index(){
+	public function familyplan(){
+		//$this->AC->check_module($this->uri->segment(1));
+		$this->data['pageTitle']='Queue';
+		$this->load->view('livequeue',$this->data);
+	}
+	public function animalbite(){
+		//$this->AC->check_module($this->uri->segment(1));
+		$this->data['pageTitle']='Queue';
+		$this->load->view('livequeue',$this->data);
+	}
+	public function familymed(){
 		//$this->AC->check_module($this->uri->segment(1));
 		$this->data['pageTitle']='Queue';
 		$this->load->view('livequeue',$this->data);

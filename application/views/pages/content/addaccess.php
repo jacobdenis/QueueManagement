@@ -22,34 +22,30 @@
 							<option value=""></option>
 						</select>
           </div>
-          <div class="form-group">
+          <div class="form-group hidden">
             <label  class="col-form-label">Create:</label>
 						<select name="Create" required class="js-states form-control clinic-select" >
-							<option value=""></option>
               <option value="1">Yes</option>
               <option value="0">No</option>
             </select>
           </div>
-					<div class="form-group">
+					<div class="form-group hidden">
             <label  class="col-form-label">Read:</label>
 						<select name="Read" required class="js-states form-control read-select" >
-						<option value=""></option>
               <option value="1">Yes</option>
               <option value="0">No</option>
             </select>
           </div>
-					<div class="form-group">
+					<div class="form-group hidden">
             <label  class="col-form-label">Update:</label>
 						<select name="Update" required class="js-states form-control update-select" >
-							<option value=""></option>
               <option value="1">Yes</option>
               <option value="0">No</option>
             </select>
           </div>
-					<div class="form-group">
+					<div class="form-group hidden   ">
             <label  class="col-form-label">Delete:</label>
 						<select name="Delete"  required class="js-states form-control delete-select" >
-							<option value=""></option>
               <option value="1">Yes</option>
               <option value="0">No</option> 
             </select>

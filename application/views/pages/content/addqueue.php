@@ -26,7 +26,7 @@
             <label  class="col-form-label">Status:</label>
 						<select name="StatusID" class="js-states form-control status-select" ></select>
           </div>
-					<div class="form-group">
+					<div class="form-group hidden">
             <label  class="col-form-label">CheckupType:</label>
 						<select name="CheckupTypeID" class="js-states form-control checkuptype-select" ></select>
           </div>
