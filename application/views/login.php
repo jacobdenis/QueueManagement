@@ -111,6 +111,7 @@
 <script>
 	var base_url="<?php echo base_url()?>";
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
+<script src="<?php echo base_url('assets/js/jquery.min.js')?>"></script>
 <script src="<?php echo base_url('assets/js/parsley.min.js')?>"></script>
 <script src="<?php echo base_url('assets/customjs/auth.js?nocache='.date('YYYY-MM-DD H:i:s').'');?>"></script>
