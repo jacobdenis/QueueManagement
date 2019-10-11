@@ -22,13 +22,20 @@
             <label  class="col-form-label">Clinic:</label>
 						<select name="ClinicID" class="js-states form-control clinic-select" ></select>
           </div>
-					<div class="form-group">
+					<div class="form-group hidden" >
             <label  class="col-form-label">Status:</label>
 						<select name="StatusID" class="js-states form-control status-select" ></select>
           </div>
 					<div class="form-group hidden">
             <label  class="col-form-label">CheckupType:</label>
 						<select name="CheckupTypeID" class="js-states form-control checkuptype-select" ></select>
+          </div>
+          <div class="form-group ">
+            <label  class="col-form-label">WaitingFrom:</label>
+            <input name="WaitingFrom" type="time" class=" form-control" >
+          </div>	<div class="form-group ">
+            <label   class="col-form-label">WaitingTo:</label>
+            <input name="WaitingTo" type="time" class=" form-control" >
           </div>
         </form>
       </div>

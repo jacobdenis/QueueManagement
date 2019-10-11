@@ -43,7 +43,8 @@
 		<link href="<?php echo base_url()?>assets/css/style.css" rel="stylesheet">
 		<!-- Select2 -->
 		<!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/css/select2.min.css" rel="stylesheet" /> -->
-		<link href="<?php echo base_url()?>assets/css/lib/select2.min.css" rel="stylesheet">
+		<link href="<?php echo base_url()?>assets/css/lib/select2/select2.min.css" rel="stylesheet">
+		<link href="<?php echo base_url()?>assets/css/lib/datepicker/bootstrap-datepicker3.min.css" rel="stylesheet">
 		 <!-- jquery vendor -->
 		 <script src="<?php echo base_url()?>assets/js/lib/jquery.min.js"></script>
 		
@@ -186,7 +187,9 @@
 		<script src="<?php echo base_url('assets/js/lib/datatables/js/datatables-init.js?nocache='.date('YYYY-MM-DD H:i:s').'')?>"></script> 
 		<!-- Select2 -->
 		<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js"></script> -->
+				
 		<script src="<?php echo base_url('assets/js/select2.min.js')?>"></script>
+		<script src="<?php echo base_url('assets/js/lib/datepicker/bootstrap-datepicker.min.js')?>"></script>
 
         <script src="<?php echo base_url('assets/customjs/global.js?nocache='.date('YYYY-MM-DD H:i:s').'')?>"></script>
         

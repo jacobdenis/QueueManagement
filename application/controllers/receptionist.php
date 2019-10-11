@@ -88,7 +88,21 @@ class receptionist extends My_Controller {
 	}
 	public function add_queue(){
 		$data=$this->decode_json($this->input->post('data'));
+		$data['IsPriority']=1;
+		if($data['IsPriority']){
+			$sql='SELECT * FROM queue WHERE ';
+		}
 		$this->db->insert('queue', $data);
+		$id=$this->db->insert_id();
+		$mydata=array(
+			'QueueID'=>$id,
+			'DateFrom'=>$data['WaitingFrom'],
+			'DateTo'=>$data['WaitingTo'],
+			'IsPriority'=>1
+
+		);
+		$this->db->insert('expected',$mydata);
+
 		if($this->db->affected_rows() >=0){
 			echo json_encode(true); //add your code here
 		}else{
