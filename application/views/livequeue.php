@@ -144,61 +144,177 @@ setInterval(update, 1000);
 				$("#active_queue_list_family_med").html('');
 				$("#active_queue_list_family_plan").html('');
 				if(url2=='animalbite'){
+					//	counter=(Object.keys(data.animal).length);
+					counter1=1;
+					badge='Pending';
+				
 					$.each( data.animal, function( key, value ) {
+						$badge1='';
+						if(value.IsPriority==1){
+
+							$badge1=`
+							<div class="badge badge-danger">Priority </div>
+									<span class="m-l-10">
+							`;
+						}
+						if(counter1==1){
+							badge='Now Serving';
+						}	else{
+							badge='Pending';
+						}
+						DateFrom=value.DateFrom;
+						DateTo=value.DateTo;
+						ExpectedTime=DateFrom +'--'+DateTo;
+						if(DateFrom===null || DateTo===null){
+							ExpectedTime="Priority";
+						}
 					$("#active_queue_list_animal_bite").append(`
 						<div class="card ">
 							<div class="card-body">
-								<h1 >${value.QueueID}</h1>
+								<h1 >${counter1}</h1>
 								<h5 class="media-heading">Patient Name: ${value.PatientName}</h5>
 								<h5 class="media-heading">Doctor Name: ${value.DoctorName}</h5>
+								<h5 class="media-heading">Expected Time: ${ExpectedTime}</h5>
 								<div class="comment-action">
-									<div class="badge badge-warning">Pending</div>
+									<div class="badge badge-warning">${badge}</div>
 									<span class="m-l-10">
+									${$badge1}
 								</span>
 								</div>
 							</div>
 						</div>
 						`);
+						counter1++;
 					});
 				}
 				if(url2=='familymed'){
+					//	counter=(Object.keys(data.animal).length);
+					counter1=1;
+					badge='Pending';
+				
 					$.each( data.family_med, function( key, value ) {
-						$("#active_queue_list_family_med").append(`
+						$badge1='';
+						if(value.IsPriority==1){
+
+							$badge1=`
+							<div class="badge badge-danger">Priority </div>
+									<span class="m-l-10">
+							`;
+						}
+						if(counter1==1){
+							badge='Now Serving';
+						}	else{
+							badge='Pending';
+						}
+						DateFrom=value.DateFrom;
+						DateTo=value.DateTo;
+						ExpectedTime=DateFrom +'--'+DateTo;
+						if(DateFrom===null || DateTo===null){
+							ExpectedTime="Priority";
+						}
+					$("#active_queue_list_family_med").append(`
 						<div class="card ">
 							<div class="card-body">
-								<h1 >${value.QueueID}</h1>
+								<h1 >${counter1}</h1>
 								<h5 class="media-heading">Patient Name: ${value.PatientName}</h5>
 								<h5 class="media-heading">Doctor Name: ${value.DoctorName}</h5>
+								<h5 class="media-heading">Expected Time: ${ExpectedTime}</h5>
 								<div class="comment-action">
-									<div class="badge badge-warning">Pending</div>
+									<div class="badge badge-warning">${badge}</div>
 									<span class="m-l-10">
+									${$badge1}
 								</span>
 								</div>
 							</div>
 						</div>
 						`);
+						counter1++;
 					});
 				}
 				if(url2=='familyplan'){
+					//	counter=(Object.keys(data.animal).length);
+					counter1=1;
+					badge='Pending';
+				
 					$.each( data.family_plan, function( key, value ) {
-						$("#active_queue_list_family_plan").append(`
+						$badge1='';
+						if(value.IsPriority==1){
 
+							$badge1=`
+							<div class="badge badge-danger">Priority </div>
+									<span class="m-l-10">
+							`;
+						}
+						if(counter1==1){
+							badge='Now Serving';
+						}	else{
+							badge='Pending';
+						}
+						DateFrom=value.DateFrom;
+						DateTo=value.DateTo;
+						ExpectedTime=DateFrom +'--'+DateTo;
+						if(DateFrom===null || DateTo===null){
+							ExpectedTime="Priority";
+						}
+					$("#active_queue_list_family_plan").append(`
 						<div class="card ">
 							<div class="card-body">
-								<h1 >${value.QueueID}</h1>
+								<h1 >${counter1}</h1>
 								<h5 class="media-heading">Patient Name: ${value.PatientName}</h5>
 								<h5 class="media-heading">Doctor Name: ${value.DoctorName}</h5>
+								<h5 class="media-heading">Expected Time: ${ExpectedTime}</h5>
 								<div class="comment-action">
-									<div class="badge badge-warning">Pending</div>
+									<div class="badge badge-warning">${badge}</div>
 									<span class="m-l-10">
+									${$badge1}
 								</span>
 								</div>
 							</div>
 						</div>
-								
 						`);
+						counter1++;
 					});
 				}
+
+				// //
+				// if(url2=='familymed'){
+				// 	$.each( data.family_med, function( key, value ) {
+				// 		$("#active_queue_list_family_med").append(`
+				// 		<div class="card ">
+				// 			<div class="card-body">
+				// 				<h1 >${value.QueueID}</h1>
+				// 				<h5 class="media-heading">Patient Name: ${value.PatientName}</h5>
+				// 				<h5 class="media-heading">Doctor Name: ${value.DoctorName}</h5>
+				// 				<div class="comment-action">
+				// 					<div class="badge badge-warning">Pending</div>
+				// 					<span class="m-l-10">
+				// 				</span>
+				// 				</div>
+				// 			</div>
+				// 		</div>
+				// 		`);
+				// 	});
+				// }
+				// if(url2=='familyplan'){
+				// 	$.each( data.family_plan, function( key, value ) {
+				// 		$("#active_queue_list_family_plan").append(`
+
+				// 		<div class="card ">
+				// 			<div class="card-body">
+				// 				<h1 >${value.QueueID}</h1>
+				// 				<h5 class="media-heading">Patient Name: ${value.PatientName}</h5>
+				// 				<h5 class="media-heading">Doctor Name: ${value.DoctorName}</h5>
+				// 				<div class="comment-action">
+				// 					<div class="badge badge-warning">Pending</div>
+				// 					<span class="m-l-10">
+				// 				</span>
+				// 				</div>
+				// 			</div>
+				// 		</div>
+								
+				// 		`);
+				// 	});
+				// }
 				
 			})
 		}

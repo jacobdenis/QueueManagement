@@ -30,7 +30,7 @@ class receptionist extends My_Controller {
 		$this->load->view('layout',$this->data);
 	}
 	public function get_queuelist(){
-		$sql="SELECT a.DateCreated, a.QueueID,f.Clinic,
+		$sql="SELECT a.DateCreated, a.QueueID,f.Clinic,a.IsPriority,a.DateFrom,a.DateTo,
 		CONCAT(c.LastName,', ', c.FirstName) as PatientName ,
 		CONCAT(b.LastName,', ', b.FirstName) as DoctorName,
 		e.Status,d.CheckupType,a.DateCreated
@@ -39,7 +39,7 @@ class receptionist extends My_Controller {
 				INNER JOIN Patient as c ON a.PatientID=c.PatientID 
 				INNER JOIN checkuptype as d ON a.CheckupTypeID=d.CheckupTypeID
 				INNER JOIN status as e ON a.StatusID=e.StatusID
-				INNER JOIN clinic as f ON a.ClinicID=f.ClinicID
+				INNER JOIN clinic as f ON a.ClinicID=f.ClinicID ORDER BY Status, IsPriority desc ,DateCreated
 		";
 		$query=$this->db->query($sql);
 		echo json_encode($query->result());
@@ -88,21 +88,30 @@ class receptionist extends My_Controller {
 	}
 	public function add_queue(){
 		$data=$this->decode_json($this->input->post('data'));
-		$data['IsPriority']=1;
-		if($data['IsPriority']){
-			$sql='SELECT * FROM queue WHERE ';
+		$sql="select * from queue where statusid IN(1,3) ";
+		$result=$this->db->query($sql)->result();
+		print_r($result);
+		if(empty($result)){
+			$data['StatusID']=3;
+		}else{
+			$data['StatusID']=1;
 		}
-		$this->db->insert('queue', $data);
-		$id=$this->db->insert_id();
-		$mydata=array(
-			'QueueID'=>$id,
-			'DateFrom'=>$data['WaitingFrom'],
-			'DateTo'=>$data['WaitingTo'],
-			'IsPriority'=>1
-
-		);
-		$this->db->insert('expected',$mydata);
-
+		if($data['IsPriority']){
+				$this->db->trans_start();
+					$data['DateFrom']=NULL;
+					$data['DateTo']=NULL;
+					$this->db->insert('queue', $data);
+					$sql="SELECT QUEUEID from queue where StatusID=1 AND IsPriority=0 AND ClinicID=?";
+					$result=$this->db->query($sql,array($data['ClinicID']))->result();
+					foreach ($result as $value) {
+						$sql="UPDATE queue set DateFrom =DateFrom + INTERVAL 10 MINUTE ,DateTo=DateTo  + INTERVAL 10 MINUTE   WHERE QueueID IN (?)";
+						$query=$this->db->query($sql,array($value->QUEUEID	));
+					}
+				$this->db->trans_complete();
+		}else{
+			$this->db->insert('queue', $data);
+		}
+		
 		if($this->db->affected_rows() >=0){
 			echo json_encode(true); //add your code here
 		}else{
@@ -121,7 +130,8 @@ class receptionist extends My_Controller {
 	}
 	public function update_queue(){
 		$data=$this->decode_json($this->input->post('data'));
-		$sql="UPDATE queue SET StatusID=? WHERE QueueID=?";
+		//print_r($data);
+		$sql="UPDATE queue SET StatusID=?	 WHERE QueueID=?";
 		$query=$this->db->query($sql,$data);
 		if($this->db->affected_rows() >=0){
 			echo json_encode(true); //add your code here

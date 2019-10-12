@@ -1,6 +1,25 @@
 
 (function ($) {
-    //"use strict";
+	//"use strict";
+	// e1
+	// from1
+	// to1
+	// priority
+	// notpriority
+	$(document).on('click',"#priority",function(){
+		$("#e1").addClass("hidden");
+		$("#from1").addClass("hidden");
+		$("#to1").addClass("hidden");
+		$("#DateFrom").val( "00:00" );
+		$("#DateTo").val( "00:00" );
+	})
+	$(document).on('click',"#notpriority",function(){
+		$("#e1").removeClass("hidden");
+		$("#from1").removeClass("hidden");
+		$("#to1").removeClass("hidden");
+		$("#DateFrom").val( '');
+		$("#DateTo").val( '' );
+	})
 	$(document).on('click',"#show_add_queue_modal",function(){
 		$.ajax({
 			url:  base_url+'index.php/receptionist/get_select',
@@ -187,8 +206,19 @@
 				{ "title":"DoctorName",	"data": "DoctorName"	},
 				{ "title":"Clinic" , "data":"Clinic"},
 				{ "title":"Status",	"data": "Status"	},
+				{
+				  "title":"IsPriority","data":null,
+				  render:function(data){
+					if(data.IsPriority==1){
+						return 'Yes';
+					}else{
+						return 'No';
+					}
+				  }
+				},
 				{ "title":"CheckupType",	"data": "CheckupType"	},
 				{ "title":"Queue",	"data": "QueueID"	},
+
 				{ "title":"Date",	"data": null,
 					render:function(data){
 						return moment().format('dddd')+' | '+moment(data.DateCreated).format("YYYY-MM-DD");
@@ -196,7 +226,7 @@
 				},
 				{ "title":"Action","data":null,
 					render:function(data){
-							if(data.Status=="Pending"){
+							if(data.Status=="Pending" || data.Status=="Now Serving"){
 								return `	
 								
 								<button type="button"  data-id="${data.QueueID}"  class="btn btn-danger btn-sm btn-flat m-b-10 m-l-5 delete_queue"><span class="ti-trash"></span></button>
@@ -217,6 +247,7 @@
 			],
 			responsive:true
 		});
+	
 		$(document).on('click',"#save_queue",function(){
 
 			if(data=getformvaluesassociative("#add_queue_form")){
