@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.0.1
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 11, 2019 at 02:00 PM
--- Server version: 10.4.6-MariaDB
--- PHP Version: 7.1.32
+-- Generation Time: Oct 12, 2019 at 03:00 PM
+-- Server version: 10.1.40-MariaDB
+-- PHP Version: 7.3.5
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -36,7 +36,7 @@ CREATE TABLE `accesscontrol` (
   `Read` tinyint(1) NOT NULL,
   `Update` tinyint(1) NOT NULL,
   `Delete` tinyint(1) NOT NULL,
-  `DateCreated` datetime NOT NULL DEFAULT current_timestamp()
+  `DateCreated` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -45,12 +45,10 @@ CREATE TABLE `accesscontrol` (
 
 INSERT INTO `accesscontrol` (`AccessControlID`, `LoginID`, `ControllerName`, `Create`, `Read`, `Update`, `Delete`, `DateCreated`) VALUES
 (8, 15, '6', 1, 1, 1, 1, '2019-07-31 20:41:47'),
-(12, 16, '2', 1, 1, 1, 1, '2019-07-31 23:41:18'),
-(13, 16, '3', 1, 1, 1, 1, '2019-07-31 23:41:26'),
-(16, 15, '2', 1, 1, 1, 1, '2019-08-01 00:22:31'),
-(17, 15, '3', 1, 1, 1, 1, '2019-08-01 00:25:25'),
-(18, 15, '4', 1, 1, 1, 1, '2019-08-01 00:26:04'),
-(19, 15, '8', 1, 1, 1, 1, '2019-08-01 23:23:01');
+(20, 16, '6', 1, 1, 1, 1, '2019-08-11 18:20:18'),
+(21, 15, '2', 1, 1, 1, 1, '2019-08-11 18:22:14'),
+(22, 15, '3', 1, 1, 1, 1, '2019-10-12 16:49:33'),
+(23, 15, '4', 1, 1, 1, 1, '2019-10-12 16:49:48');
 
 -- --------------------------------------------------------
 
@@ -132,7 +130,7 @@ CREATE TABLE `employee` (
   `Email` varchar(250) NOT NULL,
   `BirthDate` date NOT NULL,
   `Gender` tinyint(1) NOT NULL,
-  `DateCreated` datetime NOT NULL DEFAULT current_timestamp()
+  `DateCreated` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -140,7 +138,9 @@ CREATE TABLE `employee` (
 --
 
 INSERT INTO `employee` (`EmployeeID`, `FirstName`, `MiddleName`, `LastName`, `Phone`, `Address`, `Email`, `BirthDate`, `Gender`, `DateCreated`) VALUES
-(21, 'System', '', 'Admin', '09187645037', 'camp 7', 'linoacob@gmail.com', '1995-01-13', 0, '2019-07-31 20:39:14');
+(21, 'System', '', 'Admin', '09187645037', 'camp 7', 'linoacob@gmail.com', '1995-01-13', 0, '2019-07-31 20:39:14'),
+(22, 'jacob', '', 'lino', '', '', '', '0000-00-00', 0, '2019-07-31 23:40:39'),
+(23, 'firstName', 'middlename', 'lastname', '09187645037', 'campe baguio city', 'jacobdenis1@outlook.com', '1995-01-13', 0, '2019-08-02 01:08:45');
 
 -- --------------------------------------------------------
 
@@ -153,7 +153,7 @@ CREATE TABLE `login` (
   `Username` varchar(250) NOT NULL,
   `Password` varchar(250) NOT NULL,
   `EmployeeID` int(11) NOT NULL,
-  `DateCreated` datetime NOT NULL DEFAULT current_timestamp()
+  `DateCreated` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -161,7 +161,9 @@ CREATE TABLE `login` (
 --
 
 INSERT INTO `login` (`LoginID`, `Username`, `Password`, `EmployeeID`, `DateCreated`) VALUES
-(15, 'systemadmin', '$2y$10$VtmHJlq28H4VjhYhGGp6K.jDCH46Tnvjx9ZQQPUpRRq6Nmw9xVSCG', 21, '2019-07-31 20:39:14');
+(15, 'systemadmin', '$2y$10$VtmHJlq28H4VjhYhGGp6K.jDCH46Tnvjx9ZQQPUpRRq6Nmw9xVSCG', 21, '2019-07-31 20:39:14'),
+(16, 'linoacob', '$2y$10$ihZhA0/iCtJAR276h43MP.PTRJWoyrOHIevr6K69jw4MJuMsXJsGi', 22, '2019-07-31 23:40:40'),
+(17, 'linoacob', '$2y$10$vR4OiRIqCPbiabGiAbEjKOZ8mp5l2f4nNVKXZI2Oj9COk.hVXIzbS', 23, '2019-08-02 01:08:45');
 
 -- --------------------------------------------------------
 
@@ -178,7 +180,7 @@ CREATE TABLE `patient` (
   `Address` varchar(250) NOT NULL,
   `BirthDate` date NOT NULL,
   `Gender` tinyint(1) NOT NULL,
-  `DateCreated` datetime NOT NULL DEFAULT current_timestamp()
+  `DateCreated` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -186,8 +188,7 @@ CREATE TABLE `patient` (
 --
 
 INSERT INTO `patient` (`PatientID`, `FirstName`, `MiddleName`, `LastName`, `Phone`, `Address`, `BirthDate`, `Gender`, `DateCreated`) VALUES
-(15, 'FirstName', 'FirstName', 'FirstName', '09187645037', 'FirstName', '2018-08-02', 0, '2019-08-02 01:45:02'),
-(16, 'dd', 'd', 'dd', 'dd', 'dd', '2019-08-01', 0, '2019-08-02 02:00:44');
+(17, 'jacob', 'Lino', 'lino', '09187645037', 'ssss', '1995-01-13', 0, '2019-08-02 02:04:46');
 
 -- --------------------------------------------------------
 
@@ -202,21 +203,19 @@ CREATE TABLE `queue` (
   `ClinicID` int(11) NOT NULL,
   `StatusID` int(11) NOT NULL,
   `CheckupTypeID` int(11) NOT NULL,
-  `DateCreated` datetime NOT NULL DEFAULT current_timestamp()
+  `DateFrom` time DEFAULT NULL,
+  `DateTo` time DEFAULT NULL,
+  `IsPriority` int(11) NOT NULL,
+  `DateCreated` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `queue`
 --
 
-INSERT INTO `queue` (`QueueID`, `PatientID`, `EmployeeID`, `ClinicID`, `StatusID`, `CheckupTypeID`, `DateCreated`) VALUES
-(8, 14, 21, 1, 2, 1, '2019-08-01 01:04:37'),
-(9, 14, 21, 1, 1, 1, '2019-08-01 01:04:40'),
-(10, 14, 21, 2, 1, 1, '2019-08-01 01:04:43'),
-(11, 14, 21, 3, 1, 1, '2019-08-01 01:04:46'),
-(12, 15, 21, 1, 1, 1, '2019-09-11 19:40:22'),
-(13, 15, 21, 2, 1, 1, '2019-09-11 19:40:36'),
-(14, 15, 21, 3, 1, 1, '2019-09-11 19:40:44');
+INSERT INTO `queue` (`QueueID`, `PatientID`, `EmployeeID`, `ClinicID`, `StatusID`, `CheckupTypeID`, `DateFrom`, `DateTo`, `IsPriority`, `DateCreated`) VALUES
+(54, 17, 21, 1, 2, 1, NULL, NULL, 1, '2019-10-12 20:54:05'),
+(55, 17, 21, 1, 2, 1, NULL, NULL, 1, '2019-10-12 20:54:07');
 
 -- --------------------------------------------------------
 
@@ -235,7 +234,9 @@ CREATE TABLE `role` (
 --
 
 INSERT INTO `role` (`RoleID`, `LoginID`, `RoleTypeID`) VALUES
-(15, 15, 3);
+(15, 15, 3),
+(16, 16, 2),
+(17, 17, 3);
 
 -- --------------------------------------------------------
 
@@ -274,7 +275,8 @@ CREATE TABLE `status` (
 
 INSERT INTO `status` (`StatusID`, `Status`) VALUES
 (1, 'Pending'),
-(2, 'Done');
+(2, 'Done'),
+(3, 'Now Serving');
 
 -- --------------------------------------------------------
 
@@ -286,7 +288,7 @@ CREATE TABLE `systemsetting` (
   `SystemSettingID` int(11) NOT NULL,
   `SystemName` varchar(250) NOT NULL,
   `SystemValue` varchar(250) NOT NULL,
-  `DateCreated` datetime NOT NULL DEFAULT current_timestamp()
+  `DateCreated` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -382,7 +384,7 @@ ALTER TABLE `systemsetting`
 -- AUTO_INCREMENT for table `accesscontrol`
 --
 ALTER TABLE `accesscontrol`
-  MODIFY `AccessControlID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `AccessControlID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `checkuptype`
@@ -418,13 +420,13 @@ ALTER TABLE `login`
 -- AUTO_INCREMENT for table `patient`
 --
 ALTER TABLE `patient`
-  MODIFY `PatientID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `PatientID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `queue`
 --
 ALTER TABLE `queue`
-  MODIFY `QueueID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `QueueID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- AUTO_INCREMENT for table `role`
@@ -442,7 +444,7 @@ ALTER TABLE `roletype`
 -- AUTO_INCREMENT for table `status`
 --
 ALTER TABLE `status`
-  MODIFY `StatusID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `StatusID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `systemsetting`
