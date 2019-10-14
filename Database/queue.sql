@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 12, 2019 at 03:00 PM
+-- Generation Time: Oct 14, 2019 at 03:33 PM
 -- Server version: 10.1.40-MariaDB
 -- PHP Version: 7.3.5
 
@@ -206,6 +206,7 @@ CREATE TABLE `queue` (
   `DateFrom` time DEFAULT NULL,
   `DateTo` time DEFAULT NULL,
   `IsPriority` int(11) NOT NULL,
+  `queuenumber` int(11) NOT NULL,
   `DateCreated` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -213,9 +214,10 @@ CREATE TABLE `queue` (
 -- Dumping data for table `queue`
 --
 
-INSERT INTO `queue` (`QueueID`, `PatientID`, `EmployeeID`, `ClinicID`, `StatusID`, `CheckupTypeID`, `DateFrom`, `DateTo`, `IsPriority`, `DateCreated`) VALUES
-(54, 17, 21, 1, 2, 1, NULL, NULL, 1, '2019-10-12 20:54:05'),
-(55, 17, 21, 1, 2, 1, NULL, NULL, 1, '2019-10-12 20:54:07');
+INSERT INTO `queue` (`QueueID`, `PatientID`, `EmployeeID`, `ClinicID`, `StatusID`, `CheckupTypeID`, `DateFrom`, `DateTo`, `IsPriority`, `queuenumber`, `DateCreated`) VALUES
+(54, 17, 21, 1, 2, 1, NULL, NULL, 1, 1, '2019-10-12 20:54:05'),
+(55, 17, 21, 1, 1, 1, NULL, NULL, 1, 3, '2019-10-12 20:54:07'),
+(56, 17, 21, 1, 1, 1, '13:00:00', '13:11:00', 0, 4, '2019-10-14 21:32:00');
 
 -- --------------------------------------------------------
 
@@ -426,7 +428,7 @@ ALTER TABLE `patient`
 -- AUTO_INCREMENT for table `queue`
 --
 ALTER TABLE `queue`
-  MODIFY `QueueID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+  MODIFY `QueueID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
 -- AUTO_INCREMENT for table `role`

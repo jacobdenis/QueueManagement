@@ -94,7 +94,7 @@ class receptionist extends My_Controller {
 			$data['StatusID']=3;
 			$data['queuenumber']=1;
 		}else{
-			$partialqueuenumber=$this->db->query('SELECT * FROM queue.queue where statusID in (3,1) ORDER BY QUEUEID Desc limit 1')->row_array()['queuenumber'];
+			$partialqueuenumber=$this->db->query('SELECT * FROM queue.queue where statusID in (3,1) and CLINICID =? ORDER BY QUEUEID Desc limit 1',array($data['ClinicID']))->row_array()['queuenumber'];
 			$data['queuenumber']=$partialqueuenumber+1;
 			$data['StatusID']=1;
 
