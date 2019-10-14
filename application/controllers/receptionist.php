@@ -90,11 +90,14 @@ class receptionist extends My_Controller {
 		$data=$this->decode_json($this->input->post('data'));
 		$sql="select * from queue where statusid IN(1,3) ";
 		$result=$this->db->query($sql)->result();
-		print_r($result);
 		if(empty($result)){
 			$data['StatusID']=3;
+			$data['queuenumber']=1;
 		}else{
+			$partialqueuenumber=$this->db->query('SELECT * FROM queue.queue where statusID in (3,1) ORDER BY QUEUEID Desc limit 1')->row_array()['queuenumber'];
+			$data['queuenumber']=$partialqueuenumber+1;
 			$data['StatusID']=1;
+
 		}
 		if($data['IsPriority']){
 				$this->db->trans_start();

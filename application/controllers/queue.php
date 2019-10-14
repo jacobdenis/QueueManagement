@@ -48,7 +48,7 @@ class queue extends My_Controller {
 		$sql="SELECT  a.QueueID,f.Clinic,
 		CONCAT(c.LastName,', ', c.FirstName) as PatientName ,
 		CONCAT(b.LastName,', ', b.FirstName) as DoctorName,
-		e.Status,d.CheckupType, TIME_FORMAT(DateFrom, '%h:%i:%s %p') as DateFrom,TIME_FORMAT(DateTo, '%h:%i:%s %p') as DateTo,a.IsPriority,a.DateCreated 
+		e.Status,d.CheckupType, TIME_FORMAT(DateFrom, '%h:%i:%s %p') as DateFrom,TIME_FORMAT(DateTo, '%h:%i:%s %p') as DateTo,a.IsPriority,a.DateCreated ,a.queuenumber
 		FROM queue as a 
 				INNER JOIN Employee as b ON  a.EmployeeID=b.EmployeeID
 				INNER JOIN Patient as c ON a.PatientID=c.PatientID 
@@ -72,7 +72,7 @@ class queue extends My_Controller {
 				INNER JOIN Patient as c ON a.PatientID=c.PatientID 
 				INNER JOIN checkuptype as d ON a.CheckupTypeID=d.CheckupTypeID
 				INNER JOIN status as e ON a.StatusID=e.StatusID
-				INNER JOIN clinic as f ON a.ClinicID=f.ClinicID Where a.StatusID IN(1,3) AND a.ClinicID=2  ORDER BY Status, IsPriority desc ,DateCreated
+				INNER JOIN clinic as f ON a.ClinicID=f.ClinicID Where a.StatusID IN(1,3) AND a.ClinicID=2  ORDER BY Status, IsPriority desc ,DateCreated,a.queuenumber
 		";
 		$query=$this->db->query($sql);
 		return $query->result();
@@ -81,13 +81,13 @@ class queue extends My_Controller {
 		$sql="SELECT  a.QueueID,f.Clinic,
 		CONCAT(c.LastName,', ', c.FirstName) as PatientName ,
 		CONCAT(b.LastName,', ', b.FirstName) as DoctorName,
-		e.Status,d.CheckupType, TIME_FORMAT(DateFrom, '%h:%i:%s %p') as DateFrom,TIME_FORMAT(DateTo, '%h:%i:%s %p') as DateTo,a.IsPriority,a.DateCreated 
+		e.Status,d.CheckupType, TIME_FORMAT(DateFrom, '%h:%i:%s %p') as DateFrom,TIME_FORMAT(DateTo, '%h:%i:%s %p') as DateTo,a.IsPriority,a.DateCreated ,a.queuenumber
 		FROM queue as a 
 				INNER JOIN Employee as b ON  a.EmployeeID=b.EmployeeID
 				INNER JOIN Patient as c ON a.PatientID=c.PatientID 
 				INNER JOIN checkuptype as d ON a.CheckupTypeID=d.CheckupTypeID
 				INNER JOIN status as e ON a.StatusID=e.StatusID
-				INNER JOIN clinic as f ON a.ClinicID=f.ClinicID Where a.StatusID IN(1,3) AND a.ClinicID=3  ORDER BY Status, IsPriority desc ,DateCreated
+				INNER JOIN clinic as f ON a.ClinicID=f.ClinicID Where a.StatusID IN(1,3) AND a.ClinicID=3  ORDER BY Status, IsPriority desc ,DateCreated,a.queuenumber
 		";
 		$query=$this->db->query($sql);
 		return $query->result();

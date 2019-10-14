@@ -171,7 +171,7 @@ setInterval(update, 1000);
 					$("#active_queue_list_animal_bite").append(`
 						<div class="card ">
 							<div class="card-body">
-								<h1 >${counter1}</h1>
+								<h1 >${value.queuenumber}</h1>
 								<h5 class="media-heading">Patient Name: ${value.PatientName}</h5>
 								<h5 class="media-heading">Doctor Name: ${value.DoctorName}</h5>
 								<h5 class="media-heading">Expected Time: ${ExpectedTime}</h5>
@@ -215,7 +215,7 @@ setInterval(update, 1000);
 					$("#active_queue_list_family_med").append(`
 						<div class="card ">
 							<div class="card-body">
-								<h1 >${counter1}</h1>
+								<h1 >${value.queuenumber}</h1>
 								<h5 class="media-heading">Patient Name: ${value.PatientName}</h5>
 								<h5 class="media-heading">Doctor Name: ${value.DoctorName}</h5>
 								<h5 class="media-heading">Expected Time: ${ExpectedTime}</h5>
@@ -259,7 +259,7 @@ setInterval(update, 1000);
 					$("#active_queue_list_family_plan").append(`
 						<div class="card ">
 							<div class="card-body">
-								<h1 >${counter1}</h1>
+								<h1 >${value.queuenumber}</h1>
 								<h5 class="media-heading">Patient Name: ${value.PatientName}</h5>
 								<h5 class="media-heading">Doctor Name: ${value.DoctorName}</h5>
 								<h5 class="media-heading">Expected Time: ${ExpectedTime}</h5>
